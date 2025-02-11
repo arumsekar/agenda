@@ -5,10 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hari = $_POST['hari'];
     $tanggal = $_POST['tanggal'];
     $jam = $_POST['jam'];
-    $lokasi_agenda = $_POST['lokasi_agenda'];
+    $lokasi= $_POST['lokasi'];
+    $agenda = $_POST['agenda'];
 
-    $query = $config->prepare("INSERT INTO tamu (hari, tanggal, jam, lokasi_agenda) VALUES (?, ?, ?, ?)");
-    $query->bind_param("ssss", $hari, $tanggal,  $jam,  $lokasi_agenda);
+    $query = $config->prepare("INSERT INTO tamu (hari, tanggal, jam, lokasi, agenda) VALUES (?, ?, ?, ?, ?)");
+    $query->bind_param("sssss", $hari, $tanggal,  $jam,  $lokasi, $agenda);
 
     if ($query->execute()) {
         echo "<script>alert('Data berhasil ditambahkan!'); window.location.href='index.php';</script>";
@@ -74,8 +75,12 @@ $config->close();
                     <input type="time" id="jam" name="jam" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="lokasi_agenda" class="form-label">Lokasi Agenda:</label>
-                    <input type="text" id="lokasi_agenda" name="lokasi_agenda" class="form-control" required>
+                    <label for="lokasi" class="form-label">Lokasi:</label>
+                    <input type="text" id="lokasi" name="lokasi" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="agenda" class="form-label">Agenda:</label>
+                    <input type="text" id="agenda" name="agenda" class="form-control" required>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-success">Tambah Data</button>

@@ -28,23 +28,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hari = $_POST['hari'];
     $tanggal = $_POST['tanggal'];
     $jam = $_POST['jam'];
-    $lokasi_agenda = $_POST['lokasi_agenda'];
+    $lokasi = $_POST['lokasi'];
+    $agenda = $_POST['agenda'];
 
     
-    if (empty($hari) || empty($tanggal) || empty($jam) || empty($lokasi_agenda)) {
+    if (empty($hari) || empty($tanggal) || empty($jam) || empty($lokasi) || empty($agenda)) {
         echo "Semua field harus diisi!";
         exit;
     }
 
    
-    $updateQuery = "UPDATE tamu SET hari = ?, tanggal = ?, jam = ?, lokasi_agenda = ? WHERE tanggal = ?";
+    $updateQuery = "UPDATE tamu SET hari = ?, tanggal = ?, jam = ?, lokasi = ?, agenda = ? WHERE tanggal = ?";
     $stmt = $config->prepare($updateQuery);
     
     if (!$stmt) {
         die("Error dalam query: " . $config->error);
     }
 
-    $stmt->bind_param("sssss", $hari, $tanggal, $jam, $lokasi_agenda, $row['tanggal']);
+    $stmt->bind_param("ssssss", $hari, $tanggal, $jam, $lokasi, $agenda, $row['tanggal']);
 
     if ($stmt->execute()) {
         echo "<script>alert('Data berhasil diperbarui!'); window.location.href='index.php';</script>";
@@ -111,8 +112,12 @@ $config->close();
                     <input type="time" id="jam" name="jam" class="form-control" value="<?php echo $row['jam']; ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="lokasi_agenda" class="form-label">Lokasi agenda:</label>
-                    <input type="text" id="lokasi_agenda" name="lokasi_agenda" class="form-control" value="<?php echo $row['lokasi_agenda']; ?>" required>
+                    <label for="lokasi" class="form-label">Lokasi:</label>
+                    <input type="text" id="lokasi" name="lokasi" class="form-control" value="<?php echo $row['lokasi']; ?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="agenda" class="form-label">Agenda:</label>
+                    <input type="text" id="agenda" name="agenda" class="form-control" value="<?php echo $row['agenda']; ?>" required>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Update Data</button>

@@ -22,7 +22,8 @@
                     <th>Hari</th>
                     <th>Tanggal</th>
                     <th>Jam</th>
-                    <th>Lokasi agenda</th>
+                    <th>Lokasi</th>
+                    <th>Agenda</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -39,7 +40,8 @@
                         <td><?php echo $row['hari']; ?></td>
                         <td><?php echo $row['tanggal']; ?></td>
                         <td><?php echo $row['jam']; ?></td>
-                        <td><?php echo $row['lokasi_agenda']; ?></td>
+                        <td><?php echo $row['lokasi']; ?></td>
+                        <td><?php echo $row['agenda']; ?></td>
                         <td>
                            <a href="edit.php?tanggal=<?php echo $row['tanggal']; ?>" class="btn btn-info mr-2">Edit</a>
                            <a href="hapus.php?tanggal=<?php echo $row['tanggal']; ?>"
